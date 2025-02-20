@@ -8,12 +8,12 @@ abstract contract ITrainingsManager {
     }
 
     struct TrainingInfo {
-        address creator;
         bytes32 name;
         bytes32 description;
+        uint256 durationInMinutes;
     }
 
     mapping(address => TrainingInfo[]) public trainings;
 
-    function addTraining(TrainingInfo calldata trainingInfo) virtual external;
+    function addTraining(TrainingInfo calldata trainingInfo) external virtual;
 }

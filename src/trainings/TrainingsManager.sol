@@ -6,7 +6,7 @@ import {ITrainingsManager} from "./ITrainingsManager.sol";
 contract TrainingsManager is ITrainingsManager {
     event TrainingCreated(bytes32 name, address creator);
 
-    function addTraining(TrainingInfo calldata trainingInfo) override external {
+    function addTraining(TrainingInfo calldata trainingInfo) external override {
         address creator = msg.sender;
 
         trainings[creator].push(trainingInfo);

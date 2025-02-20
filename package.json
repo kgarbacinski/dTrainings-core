@@ -9,6 +9,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "forge": "^2.3.0"
+    "forge": "^2.3.0",
+    "prettier": "^3.5.1",
+    "prettier-plugin-solidity": "^1.4.2"
   }
 }
