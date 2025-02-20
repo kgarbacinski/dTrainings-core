@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "hardhat": "^2.22.18"
+  "dependencies": {
+    "forge": "^2.3.0"
   }
 }
