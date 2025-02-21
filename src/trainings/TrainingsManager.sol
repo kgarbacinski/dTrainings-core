@@ -13,4 +13,8 @@ contract TrainingsManager is ITrainingsManager {
 
         emit TrainingCreated(trainingInfo.name, msg.sender);
     }
+
+    function getTrainings(address creator) external view returns (TrainingInfo[] memory) {
+        return trainings[creator];
+    }
 }
