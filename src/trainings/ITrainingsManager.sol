@@ -16,4 +16,10 @@ abstract contract ITrainingsManager {
     mapping(address => TrainingInfo[]) public trainings;
 
     function addTraining(TrainingInfo calldata trainingInfo) external virtual;
+
+    /// @dev Get all trainings created by a specific creator.
+    /// @dev The getter for the whole array isn't generated automatically by Solidity, so we need to implement it manually.
+    function getTrainings(
+        address creator
+    ) external view virtual returns (TrainingInfo[] calldata);
 }
