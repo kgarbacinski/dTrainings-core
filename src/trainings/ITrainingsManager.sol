@@ -8,10 +8,13 @@ abstract contract ITrainingsManager {
     }
 
     struct TrainingInfo {
-        bytes32 name;
+        bytes32 name; // unique name for the trainings of owner
         bytes32 description;
         uint256 durationInMinutes;
     }
+
+    event TrainingCreated(bytes32 name, address creator);
+    event TrainingDeleted(bytes32 name, address creator);
 
     mapping(address => TrainingInfo[]) public trainings;
 
@@ -22,4 +25,6 @@ abstract contract ITrainingsManager {
     function getTrainings(
         address creator
     ) external view virtual returns (TrainingInfo[] calldata);
+
+    function deleteTraining(bytes32 name) external virtual;
 }
