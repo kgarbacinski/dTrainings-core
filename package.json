@@ -9,7 +9,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@openzeppelin/contracts": "^5.2.0",
     "forge": "^2.3.0",
+    "openzeppelin": "^1.0.0",
     "prettier": "^3.5.1",
     "prettier-plugin-solidity": "^1.4.2"
   }
