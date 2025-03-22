@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.10;
 
-import {CommonErrors} from "errors/Common.sol";
+import {CommonErrors} from "src/errors/CommonErrors.sol";
 
-abstract contract Auth {
+contract Auth {
     // @dev Emitted when new owner address is set.
     event OwnerSet(address oldOwner, address newOwner);
 
@@ -28,7 +28,6 @@ abstract contract Auth {
         emit OwnerSet(address(0), owner);
     }
 
-    // @dev Starts the ownership transfer of the contract to a new account. Can be called by the current owner only.
     function transferOwnership(address newOwner) external {
         require(newOwner != address(0), CommonErrors.INVALID_ARGUMENT);
         require(msg.sender == owner, CommonErrors.UNAUTHORIZED_CALLER);
@@ -38,7 +37,6 @@ abstract contract Auth {
         emit OwnershipTransferStarted(owner, pendingOwner);
     }
 
-    // @dev Accepts the ownership transfer of the contract to a new account. Can be called by the pending owner only.
     function acceptOwnership() external {
         require(msg.sender == pendingOwner, CommonErrors.UNAUTHORIZED_CALLER);
         address oldOwner = owner;

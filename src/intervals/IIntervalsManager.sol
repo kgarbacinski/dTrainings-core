@@ -1,14 +1,24 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.10;
 
-interface IIntervalsManager {
+abstract contract IIntervalsManager {
     struct Interval {
         uint256 start;
         uint256 end;
         uint256 duration;
     }
 
-    function createInterval() external returns (uint256);
-    function getCurrentIntervalIndex() external view returns (uint256);
-    function getCurrentInterval() external view returns (Interval);
+    event IntervalCreated(
+        uint256 indexed intervalIndex,
+        uint256 start,
+        uint256 end
+    );
+
+    function createInterval(uint256 duration) external virtual;
+    function getCurrentIntervalIndex() external view virtual returns (uint256);
+    function getCurrentInterval()
+        external
+        view
+        virtual
+        returns (Interval memory);
 }
