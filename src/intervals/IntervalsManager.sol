@@ -42,12 +42,16 @@ contract IntervalsManager is IIntervalsManager, MultisigAuth {
         view
         override
         returns (uint256)
-    {}
+    {
+        return intervals.length;
+    }
 
     function getCurrentInterval()
         external
         view
         override
         returns (Interval memory)
-    {}
+    {
+        return intervals[intervals.length - 1];
+    }
 }
