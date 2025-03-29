@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.10;
 
-abstract contract ITrainingsManager {
+interface ITrainingsManager {
     enum TrainingState {
         Approved,
         Unapproved
     }
 
     struct TrainingInfo {
-        bytes32 name; // unique name for the trainings of owner
+        bytes32 name; // unique name for the training of the owner
         bytes32 description;
         uint256 durationInMinutes;
     }
@@ -16,15 +16,18 @@ abstract contract ITrainingsManager {
     event TrainingCreated(bytes32 name, address creator);
     event TrainingDeleted(bytes32 name, address creator);
 
-    mapping(address => TrainingInfo[]) public trainings;
-
+    /// @notice Adds a new training for the calling user.
+    /// @param trainingInfo The details of the training to be added.
     function addTraining(TrainingInfo calldata trainingInfo) external virtual;
 
-    /// @dev Get all trainings created by a specific creator.
-    /// @dev The getter for the whole array isn't generated automatically by Solidity, so we need to implement it manually.
+    /// @notice Get all trainings created by a specific creator.
+    /// @param creator The address of the training creator.
+    /// @return An array of TrainingInfo structs created by the given address.
     function getTrainings(
         address creator
-    ) external view virtual returns (TrainingInfo[] calldata);
+    ) external view virtual returns (TrainingInfo[] memory);
 
+    /// @notice Deletes a training by name.
+    /// @param name The unique name of the training to be deleted.
     function deleteTraining(bytes32 name) external virtual;
 }

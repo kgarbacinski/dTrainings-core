@@ -36,6 +36,8 @@ abstract contract Proxy {
         }
     }
 
+    receive() external payable {}
+
     function _isContract(address target) private view returns (bool) {
         return target.code.length != 0;
     }
@@ -45,7 +47,7 @@ abstract contract Proxy {
         bytes memory data
     ) internal {
         require(
-            !_isContract(newImplementation),
+            _isContract(newImplementation),
             "Proxy: newImplementation is not a contract"
         );
 
