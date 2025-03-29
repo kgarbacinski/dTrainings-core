@@ -10,3 +10,8 @@ forge script scripts/prod/01_DeployTrainingsManager.sol --rpc-url $RPC_URL --pri
 ```
 npx prettier --write --plugin=prettier-plugin-solidity '<dir>/*.sol'
 ```
+
+# Compiling
+```
+forge build
+```

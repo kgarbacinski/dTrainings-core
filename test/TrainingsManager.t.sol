@@ -1,6 +1,8 @@
-import "../src/trainings/logic/TrainingsManager.sol";
+pragma solidity ^0.8.10;
+
+import "src/trainings/TrainingsManager.sol";
 import "lib/forge-std/src/Test.sol";
-import "../src/trainings/logic/ITrainingsManager.sol";
+import "src/trainings/ITrainingsManager.sol";
 
 contract TrainingsManagerTest is Test {
     ITrainingsManager public trainingsManager;

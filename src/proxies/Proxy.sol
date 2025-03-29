@@ -2,7 +2,7 @@
 pragma solidity ^0.8.10;
 import "@openzeppelin/contracts/utils/Address.sol";
 
-abstract contract Proxy is Address {
+abstract contract Proxy {
     /// @dev EIP-1967 compliant storage slot for the contract implementation address.
 
     event ProxyImplementationUpdated(
@@ -36,12 +36,18 @@ abstract contract Proxy is Address {
         }
     }
 
+    receive() external payable {}
+
+    function _isContract(address target) private view returns (bool) {
+        return target.code.length != 0;
+    }
+
     function _setImplementation(
         address newImplementation,
         bytes memory data
     ) internal {
         require(
-            Address.isContract(newImplementation),
+            _isContract(newImplementation),
             "Proxy: newImplementation is not a contract"
         );
 

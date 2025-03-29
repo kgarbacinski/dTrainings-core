@@ -2,9 +2,9 @@
 pragma solidity ^0.8.10;
 
 import "forge-std/Script.sol";
-import {ITrainingsManager} from "../../src/trainings/logic/ITrainingsManager.sol";
-import {TrainingsManager} from "../../src/trainings/logic/TrainingsManager.sol";
-
+import {ITrainingsManager} from "src/trainings/logic/ITrainingsManager.sol";
+import {TrainingsManager} from "src/trainings/logic/TrainingsManager.sol";
+import {console} from "forge-std/console.sol";
 
 contract DeployTrainingsManager is Script {
     function run() public {
