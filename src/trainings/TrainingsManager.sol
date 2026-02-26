@@ -26,7 +26,12 @@ contract TrainingsManager is ITrainingsManager {
             );
         }
 
-        trainings[creator].push(trainingInfo);
+        trainings[creator].push(TrainingInfo({
+            name: trainingInfo.name,
+            description: trainingInfo.description,
+            durationInMinutes: trainingInfo.durationInMinutes,
+            createdAt: block.timestamp
+        }));
 
         emit TrainingCreated(trainingInfo.name, msg.sender);
     }
@@ -39,15 +44,38 @@ contract TrainingsManager is ITrainingsManager {
 
     function deleteTraining(bytes32 name) external override {
         address creator = msg.sender;
+        uint256 len = trainings[creator].length;
+
+        for (uint256 i = 0; i < len; i++) {
+            if (trainings[creator][i].name == name) {
+                trainings[creator][i] = trainings[creator][len - 1];
+                trainings[creator].pop();
+
+                emit TrainingDeleted(name, msg.sender);
+                return;
+            }
+        }
+
+        revert("TrainingsManager: Training not found");
+    }
+
+    function updateTraining(bytes32 name, bytes32 newDescription, uint256 newDurationInMinutes) external override {
+        address creator = msg.sender;
 
         for (uint256 i = 0; i < trainings[creator].length; i++) {
             if (trainings[creator][i].name == name) {
-                delete trainings[creator][i];
+                trainings[creator][i].description = newDescription;
+                trainings[creator][i].durationInMinutes = newDurationInMinutes;
 
-                emit TrainingDeleted(name, msg.sender);
-
-                break;
+                emit TrainingUpdated(name, msg.sender);
+                return;
             }
         }
+
+        revert("TrainingsManager: Training not found");
+    }
+
+    function getTrainingCount(address creator) external view override returns (uint256) {
+        return trainings[creator].length;
     }
 }

@@ -11,10 +11,12 @@ interface ITrainingsManager {
         bytes32 name; // unique name for the training of the owner
         bytes32 description;
         uint256 durationInMinutes;
+        uint256 createdAt;
     }
 
     event TrainingCreated(bytes32 name, address creator);
     event TrainingDeleted(bytes32 name, address creator);
+    event TrainingUpdated(bytes32 name, address creator);
 
     /// @notice Adds a new training for the calling user.
     /// @param trainingInfo The details of the training to be added.
@@ -30,4 +32,15 @@ interface ITrainingsManager {
     /// @notice Deletes a training by name.
     /// @param name The unique name of the training to be deleted.
     function deleteTraining(bytes32 name) external virtual;
+
+    /// @notice Updates a training's description and duration.
+    /// @param name The unique name of the training to update.
+    /// @param newDescription The new description.
+    /// @param newDurationInMinutes The new duration in minutes.
+    function updateTraining(bytes32 name, bytes32 newDescription, uint256 newDurationInMinutes) external virtual;
+
+    /// @notice Returns the number of trainings for a creator.
+    /// @param creator The address of the training creator.
+    /// @return The number of trainings.
+    function getTrainingCount(address creator) external view virtual returns (uint256);
 }
